@@ -234,7 +234,7 @@
         \[\frac{d}{dt} \exp\left(\hat{A} t\right) = \hat{A} \exp\left(\hat{A} t\right)\]
 
         This is the property that justifies this definition. It notably means that the general solution to $\hat{A} \ket{\psi\left(t\right)} = \frac{d}{dt} \ket{\psi\left(t\right)}$ is: 
-        \[\ket{\psi\left(t\right)} = \exp\left(At\right) \ket{\psi\left(0\right)}\]
+        \[\ket{\psi\left(t\right)} = \exp\left(\hat{A}t\right) \ket{\psi\left(0\right)}\]
     \end{subparag}
 
     \begin{subparag}{Property 2}
@@ -359,7 +359,7 @@
 
     \begin{subparag}{Intuition}
         Representing our state in the basis formed by the eigenkets of $\hat{A}$ helps us understand what is happening: 
-        \[\ket{\psi} = \psi_1 \ket{A_1} + \ldots + \psi_n \ket{\psi_n}\]
+        \[\ket{\psi} = \psi_1 \ket{A_1} + \ldots + \psi_n \ket{A_n}\]
         
         Since the eigenkets are orthonormal, we have: 
         \[\braket{A_i}{\psi} = \psi_i\]
@@ -390,7 +390,7 @@
         \[\ket{\psi} = \sum_{i, j}^{} \psi_{i,j} \ket{A_i B_j}\]
         
         We can then write this state as: 
-        \[\ket{\psi} = \sum_{i}^{} \ket{A_i} \otimes \left(\sum_{j}^{} \psi_{i, j} \ket{B_j}\right)\]
+        \[\ket{\psi} = \sum_{i}^{} \left(\ket{A_i} \otimes \left(\sum_{j}^{} \psi_{i, j} \ket{B_j}\right)\right)\]
         
         Therefore, it makes sense that, when we measure and the state of the first particle collapses to $\ket{A_i}$, then the whole state simply collapses to something proportional to: 
         \[c\ket{\psi'} = \ket{A_i} \otimes \left(\sum_{j}^{} \psi_{i, j} \ket{B_j}\right) = \sum_{j}^{} \psi_{i, j}\ket{A_i B_j}\]
@@ -507,7 +507,7 @@
         It is also possible to define the q-bits using light polarisation. If the light is horizontally polarised we note $\ket{0}$, and if it is vertically polarised we note $\ket{1}$. This can be measured using a horizontal polariser filter, followed by photodector. If the detector clicks, the photon was not absorbed and thus collapsed to its horizontal polarisation state. If the detector does not click, the photon was absorbed by the filter, and thus collapsed to its vertical state. Then, $\hat{\sigma}_x$ is equivalent to a polariser filter which is at $\SI{45}{\degree}$ and $\hat{\sigma}_y$ is equivalent to measuring light circular polarisation.
 
         This is a completely equivalent definition, but it allows to make sense of the following eigenbasis, which is appears when setting the polariser at angle $\alpha$:
-        \[\ket{\alpha} = \cos\left(\alpha\right) \ket{0} + \sin\left(\alpha\right)\ket{1}, \mathspace \ket{\alpha_{\perp}} = \cos\left(\alpha\right) \ket{0} - \sin\left(\alpha\right) \ket{1}\]
+        \[\ket{\alpha} = \cos\left(\alpha\right) \ket{0} + \sin\left(\alpha\right)\ket{1}, \mathspace \ket{\alpha_{\perp}} = \sin\left(\alpha\right) \ket{0} - \cos\left(\alpha\right) \ket{1}\]
     \end{subparag}
 
     \begin{subparag}{Notation}
@@ -680,10 +680,10 @@
         \autoeq{\exval\left(AB \suchthat \alpha, \beta\right) = \sum_{a, b} ab \prob\left(a, b \suchthat \alpha, \beta\right) = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \sum_{a, b} ab\prob\left(a, b \suchthat \alpha, \beta, \lambda\right) = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \sum_{a, b} ab \prob\left(a \suchthat \alpha, \lambda\right) \prob\left(b \suchthat \beta, \lambda\right) = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \sum_{a} a \prob\left(a \suchthat \alpha, \lambda\right) \sum_{b} b\prob\left(b \suchthat \beta, \lambda\right) = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \exval\left(A \suchthat \alpha, \lambda\right) \exval\left(B \suchthat \beta, \lambda\right)}
         
         To again simplify the notation, we let $\exval\left(A \suchthat \alpha, \lambda\right) = \hat{a}$ and similarly for the other terms. Doing the same reasoning for the other terms and putting everything together, we get: 
-        \autoeq{x = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \left(\hat{a} \hat{b} + \hat{a} \hat{b}' - \hat{a}' \hat{b} + \hat{a} \hat{b}\right) = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \left[\hat{a}\left(\hat{b} + \hat{b}'\right) - \hat{a}' \left(\hat{b}' - \hat{b}\right)\right]}
+        \autoeq{x = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \left(\hat{a} \hat{b} + \hat{a} \hat{b}' - \hat{a}' \hat{b} + \hat{a}' \hat{b}'\right) = \int_{-\infty}^{\infty} d\lambda h\left(\lambda\right) \left[\hat{a}\left(\hat{b} + \hat{b}'\right) - \hat{a}' \left(\hat{b} - \hat{b}'\right)\right]}
         
         However, we notice that $\hat{a} = \exval\left(A \suchthat \alpha, \lambda\right) \in \left\{-1, 1\right\}$: the value of $A$ solely depends on the value of $\lambda$ so, when we do our measurement in the basis $\alpha$, we will always get the same value, which is either $-1$ or $1$; and similarly for all other terms. We now want to use this fact to show that: 
-        \[u = \hat{a}\left(\hat{b} + \hat{b}'\right) - \hat{a}' \left(\hat{b}' - \hat{b}\right) \in \left\{-2, 2\right\}\]
+        \[u = \hat{a}\left(\hat{b} + \hat{b}'\right) - \hat{a}' \left(\hat{b} - \hat{b}'\right) \in \left\{-2, 2\right\}\]
         
         Indeed, we can consider two cases. If $\hat{b} = \hat{b}' \in \left\{-1, 1\right\}$, it yields that the second term is 0, and that the first term is either $-2$ or $2$. If however, $\hat{b} \neq \hat{b}'$, it means that one is $-1$ and the other is $1$, showing that the first term is $0$. By the same reasoning, we get that $u \in \left\{-2, 2\right\}$.
 
